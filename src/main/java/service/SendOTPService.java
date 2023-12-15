@@ -36,9 +36,6 @@ public class SendOTPService {
 
         });
 
-        // Used to debug SMTP issues
-        session.setDebug(true);System.out.println("Connection ho gya saab");
-
         try {
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
