@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Welcome {
-    public void welcomeScreen() throws SQLException {
+    public void welcomeScreen() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Welcome to the app");
         System.out.println("Press 1 to login");
@@ -56,35 +56,26 @@ public class Welcome {
         }
 
     }
-    private void signUp() throws SQLException {
+    private void signUp() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter name");
         String name = sc.nextLine();
         System.out.println("Enter email");
         String email = sc.nextLine();
-        User user = new User(name, email);
-        int response = UserService.saveUser(user);
-        switch (response) {
-            case 0 -> System.out.println("User already exists");
-            case 1 -> {
-                String genOTP = GenerateOTP.getOTP();
-                SendOTPService.sendOTP(email, genOTP);
-                System.out.println("Enter the otp");
-                String otp = sc.nextLine();
-                if(otp.equals(genOTP)) {
-                    int x = UserDAO.saveUser(user);
-                    if(x>0){
-                        System.out.println("User registered");
-                    }
-                    else{
-                        System.out.println("User could not be registered due to error!");
-                    }
-                } else {
-                    System.out.println("Wrong OTP");
-                }
+        String genOTP = GenerateOTP.getOTP();
+        SendOTPService.sendOTP(email, genOTP);
+        System.out.println("Enter the otp");
+        String otp = sc.nextLine();
+        if(otp.equals(genOTP)) {
+            User user = new User(name, email);
+            int response = UserService.saveUser(user);
+            switch (response) {
+                case 0 -> System.out.println("User registered");
+                case 1 -> System.out.println("User already exists");
             }
+        } else {
+            System.out.println("Wrong OTP");
         }
-
 
     }
 }
