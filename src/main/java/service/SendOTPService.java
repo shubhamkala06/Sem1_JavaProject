@@ -8,10 +8,9 @@ import java.util.Properties;
 public class SendOTPService {
     public static void sendOTP(String email, String genOTP) {
         // Recipient's email ID needs to be mentioned.
-        String to = email;
 
         // Sender's email ID needs to be mentioned
-        String from = "mca23.shubhamkala@bvicam.in";
+        String from = "25shubhamkala@gmail.com";
 
         // Assuming you are sending email from through gmail smtp
         String host = "smtp.gmail.com";
@@ -30,7 +29,7 @@ public class SendOTPService {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication(from, "ezxs nzxd fnaq bmcw");
+                return new PasswordAuthentication(from, "bsav wwjw nqjx frvs");
 
             }
 
@@ -44,7 +43,7 @@ public class SendOTPService {
             message.setFrom(new InternetAddress(from));
 
             // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
             // Set Subject: header field
             message.setSubject("OTP for File Hider/Encryptor");

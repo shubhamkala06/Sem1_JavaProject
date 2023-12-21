@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Welcome {
-    public void welcomeScreen() {
+    public void welcomeScreen() throws SQLException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Welcome to the app");
         System.out.println("Press 1 to login");
@@ -56,7 +56,7 @@ public class Welcome {
         }
 
     }
-    private void signUp() {
+    private void signUp() throws SQLException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter name");
         String name = sc.nextLine();
@@ -72,7 +72,13 @@ public class Welcome {
                 System.out.println("Enter the otp");
                 String otp = sc.nextLine();
                 if(otp.equals(genOTP)) {
-                    System.out.println("User registered");
+                    int x = UserDAO.saveUser(user);
+                    if(x>0){
+                        System.out.println("User registered");
+                    }
+                    else{
+                        System.out.println("User could not be registered due to error!");
+                    }
                 } else {
                     System.out.println("Wrong OTP");
                 }

@@ -3,7 +3,6 @@ package dao;
 import db.MyConnection;
 import model.Data;
 
-import java.awt.image.RescaleOp;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class DataDAO {
         }
         return files;
     }
-    public static int hideFile(Data file)throws SQLException, IOException {
+    public static void hideFile(Data file)throws SQLException, IOException {
         Connection connection = MyConnection.getConnection();
         PreparedStatement ps = connection.prepareStatement(
                 "insert into data(name, path, email, bin_data) values(?,?,?,?)");
@@ -37,7 +36,6 @@ public class DataDAO {
         int ans = ps.executeUpdate();
         fr.close();
         f.delete();
-        return ans;
     }
     public static void unhide(int id) throws SQLException, IOException {
         Connection connection = MyConnection.getConnection();
