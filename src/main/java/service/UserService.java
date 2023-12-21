@@ -11,7 +11,7 @@ public class UserService {
             if(UserDAO.isExists(user.getEmail())) {
                 return 0;
             } else {
-                return UserDAO.saveUser(user);
+                return 1;
 
             }
         } catch (SQLException ex) {

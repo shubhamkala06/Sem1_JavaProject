@@ -1,7 +1,10 @@
 import views.Welcome;
 
-public class Main {
-    public static void main(String[] args) {
+import java.sql.SQLException;
+
+
+public class Main{
+    public static void main(String[] args) throws SQLException {
         Welcome w =new Welcome();
         do {
             w.welcomeScreen();
