@@ -43,7 +43,7 @@ public class Welcome {
                 System.out.println("Enter the otp");
                 String otp = sc.nextLine();
                 if(otp.equals(genOTP)) {
-                   new UserView(email).home();
+                    new UserView(email).home();
 
                 } else {
                     System.out.println("Wrong OTP");
@@ -62,20 +62,23 @@ public class Welcome {
         String name = sc.nextLine();
         System.out.println("Enter email");
         String email = sc.nextLine();
-        String genOTP = GenerateOTP.getOTP();
-        SendOTPService.sendOTP(email, genOTP);
-        System.out.println("Enter the otp");
-        String otp = sc.nextLine();
-        if(otp.equals(genOTP)) {
-            User user = new User(name, email);
-            int response = UserService.saveUser(user);
-            switch (response) {
-                case 0 -> System.out.println("User registered");
-                case 1 -> System.out.println("User already exists");
+        User user = new User(name, email);
+        int response = UserService.saveUser(user);
+        switch (response) {
+            case 0 -> System.out.println("User already exists");
+            case 1 -> {
+                String genOTP = GenerateOTP.getOTP();
+                SendOTPService.sendOTP(email, genOTP);
+                System.out.println("Enter the otp");
+                String otp = sc.nextLine();
+                if(otp.equals(genOTP)) {
+                    System.out.println("User registered");
+                } else {
+                    System.out.println("Wrong OTP");
+                }
             }
-        } else {
-            System.out.println("Wrong OTP");
         }
+
 
     }
 }
